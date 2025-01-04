@@ -26,3 +26,5 @@ flutter:
 
   assets:
     - assets/background.jpg
+    - assets/rainy.jpg
+    - assets/cloudy.jpg

@@ -55,13 +55,61 @@ class _Screen2State extends State<Screen2> {
   }
 
   Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/background.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
+    return BlocBuilder<WeatherBloc, WeatherState>(
+      builder: (context, state) {
+        if (state is WeatherLoading) {
+          return Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/background.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        } else if (state is WeathersLoaded) {
+          final weatherData = state.response.list?.isNotEmpty == true ? state.response.list![0] : null;
+
+          if (weatherData == null) {
+            return Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/background.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          }
+
+          final weatherCondition = weatherData.weather?.first.main?.toLowerCase() ?? "";
+
+          String backgroundImage;
+          if (weatherCondition.contains("rain")) {
+            backgroundImage = 'assets/rainy.jpg';
+          } else if (weatherCondition.contains("cloud")) {
+            backgroundImage = 'assets/cloudy.jpg';
+          } else {
+            backgroundImage = 'assets/background.jpg';
+          }
+
+          return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(backgroundImage),
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        }
+
+        return Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/background.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      },
     );
   }
 

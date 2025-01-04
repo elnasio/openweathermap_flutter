@@ -14,7 +14,8 @@ class WeatherService {
         '/forecast',
         queryParameters: {
           'q': city,
-          'cnt': 10
+          'cnt': 10,
+          'lang': 'id'
         },
       );
 
