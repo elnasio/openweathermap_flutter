@@ -252,7 +252,7 @@ class _Screen2State extends State<Screen2> {
             margin: const EdgeInsets.symmetric(horizontal: 16.0),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             elevation: 4,
-            color: Colors.white.withOpacity(0.9),
+            color: Colors.indigo.withOpacity(0.5),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
               child: Row(
@@ -283,13 +283,14 @@ class _Screen2State extends State<Screen2> {
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
+            color: Colors.white
           ),
         ),
         CustomText(
           text: label,
           style: const TextStyle(
             fontSize: 12,
-            color: Colors.grey,
+            color: Colors.white,
           ),
           textAlign: TextAlign.center,
         ),
@@ -310,15 +311,16 @@ class _Screen2State extends State<Screen2> {
             margin: const EdgeInsets.symmetric(horizontal: 16.0),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             elevation: 4,
-            color: Colors.white.withOpacity(0.9),
+            color: Colors.indigo.withOpacity(0.5),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: SizedBox(
-                height: 220, // Increased height to fit additional data
-                child: ListView.builder(
+                height: 220,
+                child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: weatherList.length,
                   padding: EdgeInsets.zero,
+                  separatorBuilder: (context, index) => const SizedBox(width: 16), // Menambah jarak antar item
                   itemBuilder: (context, index) {
                     final weather = weatherList[index];
                     return _buildDetailedWeatherItem(weather);
@@ -351,6 +353,7 @@ class _Screen2State extends State<Screen2> {
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
+              color: Colors.white
             ),
           ),
           const SizedBox(height: 8),
@@ -365,11 +368,11 @@ class _Screen2State extends State<Screen2> {
           const SizedBox(height: 8),
           CustomText(
             text: "${tempCelsius.toStringAsFixed(1)}°C",
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           CustomText(
             text: description,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
+            style: const TextStyle(fontSize: 12, color: Colors.white),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
@@ -380,7 +383,7 @@ class _Screen2State extends State<Screen2> {
               const SizedBox(width: 4),
               CustomText(
                 text: "$humidity%",
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                style: const TextStyle(fontSize: 12, color: Colors.white),
               ),
             ],
           ),
@@ -392,7 +395,7 @@ class _Screen2State extends State<Screen2> {
               const SizedBox(width: 4),
               CustomText(
                 text: "$pressure hPa",
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                style: const TextStyle(fontSize: 12, color: Colors.white),
               ),
             ],
           ),
@@ -404,7 +407,7 @@ class _Screen2State extends State<Screen2> {
               const SizedBox(width: 4),
               CustomText(
                 text: "${windSpeed.toStringAsFixed(1)} m/s",
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                style: const TextStyle(fontSize: 12, color: Colors.white),
               ),
             ],
           ),
